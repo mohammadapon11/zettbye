@@ -113,17 +113,30 @@ src/
 
 ## 🔐 Authentication
 
-The dashboard includes a complete authentication system:
+The dashboard includes a complete authentication system with **real Google OAuth**:
 
-### Demo Login Credentials:
+### 🚀 Google OAuth Login:
+- **Real Google Authentication**: Full OAuth 2.0 implementation
+- **Google Identity Services**: Latest Google sign-in technology
+- **One-Tap Sign-In**: Automatic sign-in prompts
+- **JWT Token Handling**: Secure token processing
+
+### 📋 Demo Login Credentials:
 - **Email**: `demo@zettabyte.com`
 - **Password**: `demo123`
 
-### Features:
+### ✨ Features:
 - **Persistent Login**: State maintained across browser sessions
 - **Protected Routes**: Profile page requires authentication
 - **Dynamic Navigation**: Menu items appear/disappear based on auth state
 - **Smooth Transitions**: Animated login/logout flow
+- **Real User Data**: Gets actual Google profile information
+
+### ⚙️ Setup Google OAuth:
+1. Create Google Cloud Console project
+2. Enable Google Identity Services
+3. Add your Client ID to `.env.local`
+4. See `GOOGLE_SETUP.md` for detailed instructions
 
 ## 🎯 Performance Optimizations
 
