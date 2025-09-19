@@ -46,15 +46,12 @@ export function useSidebar() {
   }, [isCollapsed, setIsCollapsed]);
 
   const toggle = () => {
-    console.log('useSidebar toggle called:', { isMobile, isMobileOpen, isCollapsed });
     if (isMobile) {
       setIsMobileOpen(prev => {
-        console.log('Mobile toggle:', prev, '->', !prev);
         return !prev;
       });
     } else {
       setIsCollapsed(prev => {
-        console.log('Desktop toggle:', prev, '->', !prev);
         return !prev;
       });
     }

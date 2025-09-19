@@ -83,7 +83,7 @@ export function SignInButton() {
       size="sm"
       icon={<LogIn className="h-4 w-4" />}
     >
-      Sign In with Google
+      <span className='hidden md:inline'>Sign In with</span> Google
     </Button>
   );
 }

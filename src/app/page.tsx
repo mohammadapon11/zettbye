@@ -94,7 +94,7 @@ export default function DashboardPage() {
           perspective: 1000,
         }}
       >
-        <Card className="bg-gradient-to-r from-primary-50 to-blue-50 border-primary-200 relative overflow-hidden">
+        <Card className="bg-gradient-to-r from-primary-50 to-blue-50 border-primary-200 relative overflow-hidden md:mt-0 mt-6">
           <CardContent className="p-8">
             <div className="flex items-center justify-between">
               <div>

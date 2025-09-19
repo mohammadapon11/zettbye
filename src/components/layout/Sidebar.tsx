@@ -149,7 +149,7 @@ export function Sidebar() {
         <motion.header
           className={cn(
             "relative border-b border-gray-200/50",
-            isMobile ? "p-4" : "p-6"
+            isMobile ? "p-4" : "p-[15px]"
           )}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -197,7 +197,6 @@ export function Sidebar() {
             {isMobile ? (
               <motion.button
                 onClick={() => {
-                  console.log('Sidebar: Mobile close clicked');
                   closeMobile();
                 }}
                 className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all duration-200"
@@ -211,10 +210,9 @@ export function Sidebar() {
               /* Desktop Toggle Button */
               <motion.button
                 onClick={() => {
-                  console.log('Sidebar: Desktop toggle clicked');
                   toggle();
                 }}
-                className="p-2 rounded-xl transition-all duration-200 hover:bg-gray-100 active:scale-95 border border-gray-200/50 shadow-sm"
+                className={`p-2 rounded-xl transition-all duration-200 hover:bg-gray-100 active:scale-95 border border-gray-200/50 shadow-sm ${isCollapsed ? 'mx-auto' : ''}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}

@@ -197,11 +197,6 @@ export function Header() {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={() => {
-                console.log('Header: Mobile menu clicked', { 
-                  isMobile, 
-                  isMobileSidebarOpen,
-                  windowWidth: window.innerWidth 
-                });
                 toggleMobileSidebar();
               }}
               className="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden"
