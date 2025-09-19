@@ -6,11 +6,13 @@ import { Button } from '@/components/ui/Button';
 import { SignInButton, ProfileButton } from '@/components/auth/SignInButton';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 /**
  * Application header with responsive design
  */
 export function Header() {
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
@@ -40,7 +42,7 @@ export function Header() {
 
   return (
     <>
-      {/* Mobile Sidebar */}
+      {/* Mobile Sidebar - Only show on mobile */}
       {isMobile && (
         <>
           {/* Mobile Overlay */}
@@ -96,9 +98,15 @@ export function Header() {
                   <Link
                     href="/"
                     onClick={() => setIsMobileSidebarOpen(false)}
-                    className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50"
+                    className={`flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 ${
+                      pathname === '/'
+                        ? 'bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="w-6 h-6 bg-primary-500 rounded-lg flex items-center justify-center">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                      pathname === '/' ? 'bg-primary-500' : 'bg-blue-500'
+                    }`}>
                       <span className="text-white text-sm">🏠</span>
                     </div>
                     <span className="font-medium text-lg">Dashboard</span>
@@ -108,9 +116,15 @@ export function Header() {
                   <Link
                     href="/posts"
                     onClick={() => setIsMobileSidebarOpen(false)}
-                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
+                    className={`flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 ${
+                      pathname === '/posts'
+                        ? 'bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                      pathname === '/posts' ? 'bg-primary-500' : 'bg-blue-500'
+                    }`}>
                       <span className="text-white text-sm">📄</span>
                     </div>
                     <span className="font-medium text-lg">Posts</span>
@@ -120,9 +134,15 @@ export function Header() {
                   <Link
                     href="/users"
                     onClick={() => setIsMobileSidebarOpen(false)}
-                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
+                    className={`flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 ${
+                      pathname === '/users'
+                        ? 'bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                      pathname === '/users' ? 'bg-primary-500' : 'bg-green-500'
+                    }`}>
                       <span className="text-white text-sm">👥</span>
                     </div>
                     <span className="font-medium text-lg">Users</span>
@@ -132,9 +152,15 @@ export function Header() {
                   <Link
                     href="/profile"
                     onClick={() => setIsMobileSidebarOpen(false)}
-                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
+                    className={`flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 ${
+                      pathname === '/profile'
+                        ? 'bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
                   >
-                    <div className="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                      pathname === '/profile' ? 'bg-primary-500' : 'bg-purple-500'
+                    }`}>
                       <span className="text-white text-sm">👤</span>
                     </div>
                     <span className="font-medium text-lg">Profile</span>

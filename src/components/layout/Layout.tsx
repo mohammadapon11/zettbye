@@ -19,7 +19,11 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50 relative">
       <FloatingParticles />
-      <Sidebar />
+      
+      {/* Desktop Sidebar - Only show on desktop */}
+      {!isMobile && <Sidebar />}
+      
+      {/* Header with Mobile Sidebar - Always show */}
       <Header />
       
       <motion.main

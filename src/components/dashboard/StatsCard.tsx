@@ -53,7 +53,7 @@ export function StatsCard({ title, value, change, icon: Icon, color, index }: St
         perspective: 1000,
       }}
     >
-      <Card className="relative overflow-hidden">
+      <Card className="relative overflow-hidden p-4">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>

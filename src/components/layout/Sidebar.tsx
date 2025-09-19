@@ -3,12 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Users, 
+import {
+  LayoutDashboard,
+  FileText,
+  Users,
   User,
-  ChevronLeft, 
+  ChevronLeft,
   ChevronRight,
   Zap,
   X
@@ -32,18 +32,6 @@ export function Sidebar() {
   const pathname = usePathname();
   const { isCollapsed, isMobile, isMobileOpen, toggle, closeMobile } = useSidebar();
   const { isAuthenticated } = useAuth();
-
-  // Debug log for mobile sidebar
-  console.log('Sidebar render:', {
-    isMobile,
-    isMobileOpen,
-    isCollapsed,
-    shouldShow: isMobile ? isMobileOpen : true,
-    position: isMobile ? (isMobileOpen ? 'visible' : 'hidden') : (isCollapsed ? 'collapsed' : 'expanded'),
-    windowWidth: typeof window !== 'undefined' ? window.innerWidth : 'SSR',
-    shouldRender: (isMobile && isMobileOpen) || !isMobile
-  });
-
 
   // Animation variants for content visibility
   const contentVariants = {
@@ -117,17 +105,17 @@ export function Sidebar() {
           isMobile && !isMobileOpen ? "pointer-events-none" : ""
         )}
         animate={
-          isMobile 
-            ? { 
-                x: isMobileOpen ? 0 : -400
-              }
-            : { 
-                width: isCollapsed ? 80 : 280,
-                x: 0
-              }
+          isMobile
+            ? {
+              x: isMobileOpen ? 0 : -400
+            }
+            : {
+              width: isCollapsed ? 80 : 280,
+              x: 0
+            }
         }
         initial={
-          isMobile 
+          isMobile
             ? { x: -400 }
             : { width: 280, x: 0 }
         }
@@ -141,24 +129,24 @@ export function Sidebar() {
           zIndex: 50,
         }}
         whileHover={{
-          boxShadow: isMobile 
-            ? undefined 
+          boxShadow: isMobile
+            ? undefined
             : "0 32px 64px -12px rgba(0, 0, 0, 0.15)",
           transition: { duration: 0.3 }
         }}
       >
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-white to-blue-50/30 -z-10" />
-        
+
         {/* Mobile Debug Indicator */}
         {isMobile && (
           <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded z-50">
             {isMobileOpen ? 'OPEN' : 'CLOSED'}
           </div>
         )}
-        
+
         {/* Header Section */}
-        <motion.header 
+        <motion.header
           className={cn(
             "relative border-b border-gray-200/50",
             isMobile ? "p-4" : "p-6"
@@ -169,15 +157,16 @@ export function Sidebar() {
         >
           <div className="flex items-center justify-between">
             {/* Logo and Brand */}
-            <motion.div 
-              className="flex items-center space-x-3"
+            <motion.div
+              className={`space-x-3 ${isCollapsed ? 'hidden' : 'flex items-center'}`}
               variants={contentVariants}
               animate={(!isMobile && isCollapsed) ? 'hidden' : 'visible'}
+              transition={{ delay: 0.3 }}
             >
               <motion.div
                 className="relative"
-                whileHover={{ 
-                  scale: 1.1, 
+                whileHover={{
+                  scale: 1.1,
                   rotateY: 180,
                   transition: { duration: 0.6 }
                 }}
@@ -189,7 +178,7 @@ export function Sidebar() {
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-primary-400 rounded-xl blur-lg opacity-30 -z-10" />
               </motion.div>
-              
+
               {(!isMobile && !isCollapsed) || isMobile ? (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
@@ -259,7 +248,7 @@ export function Sidebar() {
           "flex-1 overflow-y-auto",
           isMobile ? "p-4" : "p-4"
         )}>
-          <motion.ul 
+          <motion.ul
             className={cn(
               "space-y-2",
               isMobile ? "space-y-3" : "space-y-2"
@@ -270,18 +259,18 @@ export function Sidebar() {
             {NAVIGATION_ITEMS.map((item, index) => {
               const Icon = iconMap[item.icon as keyof typeof iconMap];
               const isActive = pathname === item.href;
-              
+
               // Hide protected routes if user is not authenticated
               if (item.protected && !isAuthenticated) {
                 return null;
               }
-              
+
               return (
                 <motion.li
                   key={item.href}
                   variants={itemVariants}
                   custom={index}
-                  whileHover={{ 
+                  whileHover={{
                     x: 4,
                     transition: { duration: 0.2 }
                   }}
@@ -292,29 +281,21 @@ export function Sidebar() {
                     className={cn(
                       "group relative flex items-center rounded-xl transition-all duration-200",
                       "hover:shadow-lg hover:shadow-primary-500/10",
-                      !isMobile && isCollapsed 
-                        ? "justify-center p-3" 
-                        : isMobile 
-                          ? "space-x-4 p-4 text-lg" 
+                      !isMobile && isCollapsed
+                        ? "justify-center p-3"
+                        : isMobile
+                          ? "space-x-4 p-4 text-lg"
                           : "space-x-3 p-3",
                       isActive
                         ? "bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 shadow-md border border-primary-200/50"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     )}
                   >
-                    {/* Active indicator */}
-                    {isActive && (
-                      <motion.div
-                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-600 rounded-r-full"
-                        layoutId="activeIndicator"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
 
                     {/* Icon */}
                     <motion.div
                       className="relative"
-                      whileHover={{ 
+                      whileHover={{
                         rotateY: 15,
                         scale: 1.1,
                         transition: { duration: 0.3 }
